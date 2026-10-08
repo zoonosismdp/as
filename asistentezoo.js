@@ -136,7 +136,7 @@ function appendMessage(content, type, isHtml = false) {
 
     el.appendChild(bubble);
     chatBody.appendChild(el);
-    
+
     // Mejor scroll: si el mensaje es del bot, que scrollee hasta el inicio del mensaje
     // para que no quede la información cortada arriba si el texto es muy largo.
     if (type === 'received') {
@@ -165,7 +165,7 @@ function getMenuText(isReturning = false) {
     if (hour >= 5 && hour < 12) saludo = "Buenos días";
     else if (hour >= 12 && hour < 20) saludo = "Buenas tardes";
 
-    const greetingHtml = isReturning 
+    const greetingHtml = isReturning
         ? `<div class="mb-3 text-slate-800 font-medium">Te muestro las opciones nuevamente:</div>`
         : `<div class="mb-3 text-slate-800">¡${saludo}! 👋 Soy el <strong>Asistente Virtual de Zoonosis</strong>.</div>
            <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">Seleccioná una categoría:</div>`;
@@ -173,10 +173,16 @@ function getMenuText(isReturning = false) {
     return `
     ${greetingHtml}
     <div class="flex flex-col gap-3">
-      <button onclick="sendOption('Consultar por Turnos', '1');" class="text-left p-4 rounded-2xl border-2 border-pink-100 bg-white hover:border-pink-400 hover:bg-pink-50 transition-all flex items-center gap-4 group shadow-md relative overflow-hidden">
+      <button onclick="sendOption('Consultar por gestión de turno castración en SEDE', '1');" class="text-left p-4 rounded-2xl border-2 border-pink-100 bg-white hover:border-pink-400 hover:bg-pink-50 transition-all flex items-center gap-4 group shadow-md relative overflow-hidden">
         <div class="absolute right-[-10px] top-[10px] opacity-5"><i class="fa-solid fa-stethoscope text-6xl text-pink-500"></i></div>
         <div class="w-12 h-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center group-hover:scale-110 transition shrink-0 z-10"><i class="fa-solid fa-calendar-check text-xl"></i></div>
-        <div class="z-10"><div class="text-base font-black text-slate-800 group-hover:text-pink-700 transition">Consultar por Turnos</div><div class="text-[11px] font-medium text-slate-500 leading-tight mt-1">Cronogramas, requisitos, cuidados postoperatorios y sedes.</div></div>
+        <div class="z-10"><div class="text-base font-black text-slate-800 group-hover:text-pink-700 transition leading-tight">Consultar por gestión de turno castración en SEDE</div><div class="text-[11px] font-medium text-slate-500 leading-tight mt-1">Requisitos, cuidados postoperatorios y lugares de registro.</div></div>
+      </button>
+      
+      <button onclick="sendOption('Ver Cronograma Móviles', 'B');" class="text-left p-4 rounded-2xl border-2 border-violet-100 bg-white hover:border-violet-400 hover:bg-violet-50 transition-all flex items-center gap-4 group shadow-md relative overflow-hidden">
+        <div class="absolute right-[-10px] top-[10px] opacity-5"><i class="fa-solid fa-truck-medical text-6xl text-violet-500"></i></div>
+        <div class="w-12 h-12 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center group-hover:scale-110 transition shrink-0 z-10"><i class="fa-solid fa-truck-medical text-xl"></i></div>
+        <div class="z-10"><div class="text-base font-black text-slate-800 group-hover:text-violet-700 transition leading-tight">Ver Cronograma Móviles</div><div class="text-[11px] font-medium text-slate-500 leading-tight mt-1">Fechas y barrios donde se ubican los quirófanos.</div></div>
       </button>
       
       <button onclick="sendOption('Mesa de Ayuda', '2');" class="text-left p-4 rounded-2xl border-2 border-emerald-100 bg-white hover:border-emerald-400 hover:bg-emerald-50 transition-all flex items-center gap-4 group shadow-md relative overflow-hidden">
@@ -218,8 +224,8 @@ async function fetchCronograma() {
                 mensaje += `<div class="bg-violet-50 border border-violet-100 rounded-xl p-3">
                               <div class="text-xs font-bold uppercase text-violet-800 mb-2 border-b border-violet-200 pb-1">${bloque.periodo}</div>`;
                 bloque.sedes.forEach(sede => {
-                    let locationQuery = sede.nombre.toLowerCase().includes('batan') || sede.nombre.toLowerCase().includes('batán') 
-                        ? sede.nombre + ', Batán' 
+                    let locationQuery = sede.nombre.toLowerCase().includes('batan') || sede.nombre.toLowerCase().includes('batán')
+                        ? sede.nombre + ', Batán'
                         : sede.nombre + ', Mar del Plata';
                     let transitUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locationQuery)}&travelmode=transit`;
                     mensaje += `
@@ -316,10 +322,6 @@ async function getBotResponse(userMsg) {
         <div class="w-8 h-8 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center"><i class="fa-solid fa-scissors"></i></div>
         <div class="text-[13px] font-bold text-slate-800">Sacar Turno Castración</div>
       </button>
-      <button onclick="sendOption('Ver Cronograma Móviles', 'B');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-violet-400 hover:bg-violet-50 transition-all flex items-center gap-3 shadow-sm">
-        <div class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 flex items-center justify-center"><i class="fa-solid fa-truck-medical"></i></div>
-        <div class="text-[13px] font-bold text-slate-800">Ver Cronograma Móviles</div>
-      </button>
       <button onclick="sendOption('Requisitos y Ayuno', 'C');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:bg-amber-50 transition-all flex items-center gap-3 shadow-sm">
         <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <div class="text-[13px] font-bold text-slate-800">Requisitos y Ayuno</div>
@@ -369,7 +371,8 @@ ${getVolverBtn()}`, html: true
                     text: `
 <div class="font-black text-pink-700 flex items-center gap-2 mb-3"><i class="fa-solid fa-calendar-check text-lg"></i> SOLICITUD DE TURNO</div>
 <div class="text-sm text-slate-700 mb-3">Para solicitar un turno de castración debés ingresar al portal oficial <strong class="text-brand-navy">MDQ Digital</strong>.</div>
-<a href="https://autenticar.mardelplata.gob.ar/" target="_blank" class="block w-full py-3 bg-brand-navy hover:bg-slate-800 text-white text-center rounded-xl font-bold shadow-md transition mb-4">Ingresar al Portal</a>
+<a href="https://autenticar.mardelplata.gob.ar/" target="_blank" class="block w-full py-3 bg-brand-navy hover:bg-slate-800 text-white text-center rounded-xl font-bold shadow-md transition mb-1">Ingresar al Portal</a>
+<div class="text-[11px] text-center text-slate-500 mb-4 break-all"><a href="https://autenticar.mardelplata.gob.ar/" target="_blank" class="hover:underline hover:text-sky-600">https://autenticar.mardelplata.gob.ar/</a></div>
 <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">¿Ya tenés usuario?</div>
 <div class="flex gap-2">
   <button onclick="sendOption('Sí, ya tengo', 'A1');" class="flex-1 py-2 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 rounded-xl font-bold text-xs transition">Sí, ya tengo</button>
@@ -447,7 +450,7 @@ ${getVolverBtn()}`, html: true
             return {
                 text: `
 <div class="font-black text-pink-700 flex items-center gap-2 mb-3"><i class="fa-solid fa-list-check text-lg"></i> LOS 8 PASOS DEL TRÁMITE</div>
-<div class="bg-pink-50/50 border border-pink-100 rounded-xl p-3 text-xs text-slate-700 space-y-2">
+<div class="bg-pink-50/50 border border-pink-100 rounded-xl p-3 text-xs text-slate-700 space-y-2 mb-4">
   <div><span class="font-bold text-pink-600 w-4 inline-block">1.</span> Ingresá con DNI y clave</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">2.</span> Clic en <b>Zoonosis</b></div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">3.</span> Sede Canesa esq. Guanahani</div>
@@ -457,20 +460,28 @@ ${getVolverBtn()}`, html: true
   <div><span class="font-bold text-pink-600 w-4 inline-block">7.</span> Aceptá consentimiento</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">8.</span> Elegí fecha y <b>Reservá</b></div>
 </div>
+<a href="https://autenticar.mardelplata.gob.ar/auth/login-option" target="_blank" class="w-full text-left p-3 rounded-xl border border-slate-200 bg-brand-navy hover:bg-slate-800 transition-all flex items-center gap-3 shadow-md mb-2 group animate-pulse">
+  <div class="w-8 h-8 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-user"></i></div>
+  <div class="text-[14px] font-bold text-white">Ingresar con DNI y Clave</div>
+</a>
 ${getVolverBtn()}`, html: true
             };
         } else if (msg === 'A2') {
             return {
                 text: `
-<div class="text-sm text-slate-700 mb-3">Si aún no tenés usuario, podés crearlo presencialmente o ver nuestro video tutorial online.</div>
+<div class="text-sm text-slate-700 mb-3">Si aún no tenés usuario, podés registrarte en MDQ DIGITAL, crearlo presencialmente en los puntos de registro o ver nuestro video tutorial online.</div>
 <div class="flex flex-col gap-2 mb-2">
+  <a href="https://autenticar.mardelplata.gob.ar/auth/register" target="_blank" class="w-full text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-emerald-400 hover:bg-emerald-50 transition-all flex items-center gap-3 shadow-sm">
+    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-user-plus"></i></div>
+    <div class="text-[13px] font-bold text-slate-800">Registrarte en MDQ DIGITAL</div>
+  </a>
   <button onclick="currentState='SUBMENU_TURNOS'; sendOption('Puntos de Registro MDQ DIGITAL', 'E');" class="w-full text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-sky-400 hover:bg-sky-50 transition-all flex items-center gap-3 shadow-sm">
     <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot"></i></div>
     <div class="text-[13px] font-bold text-slate-800">Puntos de Registro MDQ DIGITAL</div>
   </button>
-  <button onclick="sendOption('Ver Video Tutorial', 'A3');" class="w-full text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-red-400 hover:bg-red-50 transition-all flex items-center gap-3 shadow-sm">
+  <button onclick="sendOption('Ver video tutorial de ayuda', 'A3');" class="w-full text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-red-400 hover:bg-red-50 transition-all flex items-center gap-3 shadow-sm">
     <div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0"><i class="fa-brands fa-youtube text-lg"></i></div>
-    <div class="text-[13px] font-bold text-slate-800">Ver Video Tutorial</div>
+    <div class="text-[13px] font-bold text-slate-800">Ver video tutorial de ayuda</div>
   </button>
 </div>
 ${getVolverBtn()}`, html: true
