@@ -271,6 +271,7 @@ async function getBotResponse(userMsg) {
             { code: 'D', state: 'SUBMENU_TURNOS', keys: ['POSTOPERATORIO', 'CUIDADO', 'MEDICACION', 'SUTURA', 'PUNTO', 'DESPUES'] },
             { code: 'B', state: 'SUBMENU_TURNOS', keys: ['CRONOGRAMA', 'MOVIL', 'BARRIO', 'FECHA', 'CALENDARIO'] },
             { code: 'E', state: 'SUBMENU_TURNOS', keys: ['REGISTRO', 'POLIDEPORTIVO', 'MDQ', 'CUENTA'] },
+            { code: 'F', state: 'SUBMENU_TURNOS', keys: ['CONSENTIMIENTO', 'QUIRURGICO', 'FIRMA', 'PDF', 'PLANILLA'] },
             { code: 'A', state: 'SUBMENU_TURNOS', keys: ['SACAR', 'PEDIR', 'NUEVO', 'SOLICITAR', 'RESERVAR'] },
             { code: '2', state: 'MAIN_MENU', keys: ['CONTACTO', 'TELEFONO', 'WHATSAPP', 'AYUDA', 'OPERADOR', 'HUMANO', 'PROBLEMA', 'MESA'] },
             { code: '1', state: 'MAIN_MENU', keys: ['TURNO', 'CASTRACION', 'CASTRAR', 'PERRO', 'GATO', 'MASCOTA'] }
@@ -287,7 +288,7 @@ async function getBotResponse(userMsg) {
         }
 
         // Si escribe un texto largo y no coincide nada, se notifica y se vuelve al menú
-        if (!matched && !['0', '1', '2', 'A', 'B', 'C', 'D', 'E', 'A1', 'A2', 'A3'].includes(msg)) {
+        if (!matched && !['0', '1', '2', 'A', 'B', 'C', 'D', 'E', 'F', 'A1', 'A2', 'A3'].includes(msg)) {
             return { text: `<div class="bg-amber-50 text-amber-700 p-3 rounded-xl border border-amber-200 text-sm"><i class="fa-solid fa-circle-question mr-2"></i>No encontré información exacta sobre eso. Por favor, seleccioná una de las opciones del menú:</div>` + getMenuText(), html: true };
         }
     }
@@ -301,6 +302,7 @@ async function getBotResponse(userMsg) {
         'C': 'SUBMENU_TURNOS',
         'D': 'SUBMENU_TURNOS',
         'E': 'SUBMENU_TURNOS',
+        'F': 'SUBMENU_TURNOS',
         'A1': 'SUBMENU_SACAR_TURNO',
         'A2': 'SUBMENU_SACAR_TURNO',
         'A3': 'SUBMENU_SACAR_TURNO'
@@ -329,6 +331,10 @@ async function getBotResponse(userMsg) {
       <button onclick="sendOption('Cuidados Postoperatorios', 'D');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-red-400 hover:bg-red-50 transition-all flex items-center gap-3 shadow-sm">
         <div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center"><i class="fa-solid fa-heart-pulse"></i></div>
         <div class="text-[13px] font-bold text-slate-800">Cuidados Postoperatorios</div>
+      </button>
+      <button onclick="sendOption('Consentimientos Quirúrgicos', 'F');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-orange-400 hover:bg-orange-50 transition-all flex items-center gap-3 shadow-sm">
+        <div class="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center"><i class="fa-solid fa-file-signature"></i></div>
+        <div class="text-[13px] font-bold text-slate-800">Consentimientos Quirúrgicos</div>
       </button>
     </div>
 ${getVolverBtn()}`, html: true
@@ -405,13 +411,21 @@ ${getVolverBtn()}`, html: true
                     text: `
 <div class="bg-[#fef2f2] border border-[#fca5a5] rounded-xl p-4 text-[#7f1d1d] text-[13px] leading-snug">
   <div class="font-bold text-[#b91c1c] flex items-center gap-2 mb-3 text-sm border-b border-[#fecaca] pb-2"><i class="fa-solid fa-heart-pulse"></i> Cuidados Postoperatorios</div>
-  <div class="space-y-3 mb-4">
+  <div class="space-y-3">
     <div class="flex gap-2 items-start"><i class="fa-solid fa-bed text-[#ef4444] mt-0.5"></i><div><strong>Reposo:</strong> Dejar en lugar cálido, tranquilo y en el piso (sobre manta). Evitar camas/sillones.</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-shield-cat text-[#ef4444] mt-0.5"></i><div><strong>Protección:</strong> Colocar collar isabelino para evitar que se lama la herida.</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-bowl-food text-[#ef4444] mt-0.5"></i><div><strong>Alimentación:</strong> Agua de a poco tras 8hs. Comida moderada tras 12hs.</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-pills text-[#ef4444] mt-0.5"></i><div><strong>Medicación (a las 24hs):</strong><br>• Antibiótico: Cefalexina 500mg (1 comp/20kg c/12hs x 7 días).<br>• Analgésico: Meloxicam 2mg (1 comp/20kg c/24hs x 3 días).</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-scissors text-[#ef4444] mt-0.5"></i><div><strong>Suturas:</strong> Se retiran a los 12 días. <em>(Gatos machos no llevan puntos).</em></div></div>
   </div>
+</div>
+${getVolverBtn()}`, html: true
+                };
+
+            case 'F': // Consentimientos Quirúrgicos
+                return {
+                    text: `
+<div class="bg-[#fef2f2] border border-[#fca5a5] rounded-xl p-4 text-[#7f1d1d] text-[13px] leading-snug">
   <div class="font-bold text-[#b91c1c] flex items-center gap-2 mb-3 text-sm border-b border-[#fecaca] pb-2"><i class="fa-solid fa-file-signature"></i> Consentimiento Quirúrgico</div>
   <a href="consentimiento-veterinario.pdf" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 bg-[#b91c1c] hover:bg-[#991b1b] text-white py-2.5 rounded-xl font-bold text-xs transition shadow-sm border border-[#7f1d1d]"><i class="fa-solid fa-file-pdf text-lg"></i> Leer Consentimiento PDF</a>
 </div>
@@ -460,7 +474,7 @@ ${getVolverBtn()}`, html: true
   <div><span class="font-bold text-pink-600 w-4 inline-block">7.</span> Aceptá consentimiento</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">8.</span> Elegí fecha y <b>Reservá</b></div>
 </div>
-<a href="https://autenticar.mardelplata.gob.ar/auth/login-option" target="_blank" class="w-full text-left p-3 rounded-xl border border-slate-200 bg-brand-navy hover:bg-slate-800 transition-all flex items-center gap-3 shadow-md mb-2 group animate-pulse">
+<a href="https://autenticar.mardelplata.gob.ar/auth/login-option" target="_blank" class="w-full text-left p-3 rounded-xl border border-slate-200 bg-brand-navy hover:bg-slate-800 transition-all flex items-center gap-3 shadow-md mb-2 group">
   <div class="w-8 h-8 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-user"></i></div>
   <div class="text-[14px] font-bold text-white">Ingresar con DNI y Clave</div>
 </a>
