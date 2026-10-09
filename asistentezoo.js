@@ -418,8 +418,9 @@ ${getVolverBtn()}`, html: true
     <div class="flex gap-2 items-start"><i class="fa-solid fa-bed text-[#ef4444] mt-0.5"></i><div><strong>Reposo:</strong> Dejar en lugar cálido, tranquilo y en el piso (sobre manta). Evitar camas/sillones.</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-shield-cat text-[#ef4444] mt-0.5"></i><div><strong>Protección:</strong> Colocar collar isabelino para evitar que se lama la herida.</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-bowl-food text-[#ef4444] mt-0.5"></i><div><strong>Alimentación:</strong> Agua de a poco tras 8hs. Comida moderada tras 12hs.</div></div>
-    <div class="flex gap-2 items-start"><i class="fa-solid fa-pills text-[#ef4444] mt-0.5"></i><div><strong>Medicación (a las 24hs):</strong><br>• Antibiótico: Cefalexina 500mg (1 comp/20kg c/12hs x 7 días).<br>• Analgésico: Meloxicam 2mg (1 comp/20kg c/24hs x 3 días).</div></div>
-    <div class="flex gap-2 items-start"><i class="fa-solid fa-scissors text-[#ef4444] mt-0.5"></i><div><strong>Suturas:</strong> Se retiran a los 12 días. <em>(Gatos machos no llevan puntos).</em></div></div>
+    <div class="flex gap-2 items-start mt-2"><i class="fa-solid fa-pills text-[#ef4444] mt-0.5"></i><div class="text-[13px]">Comenzar con la administración de los antibióticos y analgésicos indicados 24 horas después de la cirugía.<br>• <strong>Antibiótico – CEFALEXINA 500 mg:</strong> 1 comprimido cada 20 kg de peso, cada 12 horas durante 7 días (dosis: 25 mg/kg).<br>• <strong>Analgésico – MELOXICAM 2 mg:</strong> 1 comprimido cada 20 kg de peso, cada 24 horas durante 3 días (dosis: 0,1 mg/kg).</div></div>
+    <div class="flex gap-2 items-start mt-2"><i class="fa-solid fa-circle-exclamation text-[#ef4444] mt-0.5"></i><div class="text-[13px]">Ante cualquier duda, complicación o cambio en el estado del animal, consultar con su veterinario/a de cabecera, quien deberá realizar el seguimiento postquirúrgico correspondiente.</div></div>
+    <div class="flex gap-2 items-start mt-2"><i class="fa-solid fa-scissors text-[#ef4444] mt-0.5"></i><div class="text-[13px]">Los puntos de sutura deberán retirarse a los 12 días de la cirugía. <strong>LOS GATOS MACHOS NO LLEVAN PUNTOS DE SUTURA.</strong></div></div>
   </div>
 </div>
 ${getVolverBtn()}`, html: true
