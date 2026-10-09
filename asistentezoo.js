@@ -288,7 +288,7 @@ async function getBotResponse(userMsg) {
         }
 
         // Si escribe un texto largo y no coincide nada, se notifica y se vuelve al menú
-        if (!matched && !['0', '1', '2', 'A', 'B', 'C', 'D', 'E', 'F', 'A1', 'A2', 'A3'].includes(msg)) {
+        if (!matched && !['0', '1', '2', 'A', 'B', 'C', 'D', 'E', 'F', 'A1', 'A2', 'A3', 'SEDE'].includes(msg)) {
             return { text: `<div class="bg-amber-50 text-amber-700 p-3 rounded-xl border border-amber-200 text-sm"><i class="fa-solid fa-circle-question mr-2"></i>No encontré información exacta sobre eso. Por favor, seleccioná una de las opciones del menú:</div>` + getMenuText(), html: true };
         }
     }
@@ -303,6 +303,7 @@ async function getBotResponse(userMsg) {
         'D': 'SUBMENU_TURNOS',
         'E': 'SUBMENU_TURNOS',
         'F': 'SUBMENU_TURNOS',
+        'SEDE': 'SUBMENU_TURNOS',
         'A1': 'SUBMENU_SACAR_TURNO',
         'A2': 'SUBMENU_SACAR_TURNO',
         'A3': 'SUBMENU_SACAR_TURNO'
@@ -323,6 +324,10 @@ async function getBotResponse(userMsg) {
       <button onclick="sendOption('Sacar Turno Castración', 'A');" class="text-left p-2.5 rounded-xl border-2 border-violet-500 bg-white hover:border-violet-600 hover:bg-violet-50 transition-all flex items-center gap-3 shadow-sm animate-pulse">
         <div class="w-8 h-8 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center"><i class="fa-solid fa-user-doctor"></i></div>
         <div class="text-[13px] font-bold text-slate-800">Sacar Turno Castración</div>
+      </button>
+      <button onclick="sendOption('¿Dónde queda la Sede?', 'SEDE');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-emerald-400 hover:bg-emerald-50 transition-all flex items-center gap-3 shadow-sm">
+        <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center"><i class="fa-solid fa-map-location-dot"></i></div>
+        <div class="text-[13px] font-bold text-slate-800">¿Dónde queda la Sede?</div>
       </button>
       <button onclick="sendOption('Requisitos y Ayuno', 'C');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:bg-amber-50 transition-all flex items-center gap-3 shadow-sm">
         <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -405,6 +410,20 @@ ${getVolverBtn()}`, html: true
   <div class="flex gap-2 items-start mb-3"><i class="fa-solid fa-dog text-[#d97706] mt-0.5"></i><div><strong>Perros/as:</strong> Concurrir con collar y correa, sujetos en todo momento. Si es raza potencialmente peligrosa, debe asistir con collar, correa y <strong>bozal</strong>.</div></div>
   <div class="flex gap-2 items-start mb-3"><i class="fa-solid fa-bag-shopping text-[#d97706] mt-0.5"></i><div><strong>Elementos a llevar:</strong> Una manta para luego de la operación, rollo de papel de cocina y bolsas de polietileno para la materia fecal.</div></div>
   <div class="flex gap-2 items-start"><i class="fa-solid fa-user-check text-[#d97706] mt-0.5"></i><div><strong>Permanencia:</strong> La persona propietaria/autorizada deberá permanecer en el lugar hasta la entrega del animal y la firma de la planilla.</div></div>
+</div>
+${getVolverBtn()}`, html: true
+                };
+
+            case 'SEDE':
+                return {
+                    text: `
+<div class="bg-[#f0fdf4] border border-[#bbf7d0] rounded-xl p-4 text-[#166534] text-[13px] leading-snug">
+  <div class="font-bold text-[#15803d] flex items-center gap-2 mb-3 text-sm border-b border-[#bbf7d0] pb-2"><i class="fa-solid fa-map-location-dot"></i> Ubicación de la Sede</div>
+  <div class="space-y-3">
+    <div class="flex gap-2 items-start"><i class="fa-solid fa-location-dot text-[#22c55e] mt-0.5"></i><div><strong>Dirección:</strong> Canesa esquina Guanahani</div></div>
+    <div class="flex gap-2 items-start"><i class="fa-solid fa-bus text-[#22c55e] mt-0.5"></i><div><strong>Colectivos:</strong> En el mapa podrás ver las paradas de las líneas 522, 571, 573, entre otras, que te acercan a la sede.</div></div>
+  </div>
+  <a href="https://maps.app.goo.gl/UbTKkZVThjRuKG4G7" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#15803d] hover:bg-[#166534] text-white py-2.5 rounded-xl font-bold text-xs transition shadow-sm mt-3"><i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps</a>
 </div>
 ${getVolverBtn()}`, html: true
                 };
