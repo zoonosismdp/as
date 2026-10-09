@@ -320,8 +320,8 @@ async function getBotResponse(userMsg) {
                     text: `
     <div class="font-black text-pink-700 flex items-center gap-2 mb-3"><i class="fa-solid fa-stethoscope text-lg"></i> CONSULTAS DE TURNOS</div>
     <div class="flex flex-col gap-2">
-      <button onclick="sendOption('Sacar Turno Castración', 'A');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-pink-400 hover:bg-pink-50 transition-all flex items-center gap-3 shadow-sm">
-        <div class="w-8 h-8 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center"><i class="fa-solid fa-scissors"></i></div>
+      <button onclick="sendOption('Sacar Turno Castración', 'A');" class="text-left p-2.5 rounded-xl border-2 border-violet-500 bg-white hover:border-violet-600 hover:bg-violet-50 transition-all flex items-center gap-3 shadow-sm animate-pulse">
+        <div class="w-8 h-8 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center"><i class="fa-solid fa-user-doctor"></i></div>
         <div class="text-[13px] font-bold text-slate-800">Sacar Turno Castración</div>
       </button>
       <button onclick="sendOption('Requisitos y Ayuno', 'C');" class="text-left p-2.5 rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:bg-amber-50 transition-all flex items-center gap-3 shadow-sm">
@@ -377,7 +377,10 @@ ${getVolverBtn()}`, html: true
                     text: `
 <div class="font-black text-pink-700 flex items-center gap-2 mb-3"><i class="fa-solid fa-calendar-check text-lg"></i> SOLICITUD DE TURNO</div>
 <div class="text-sm text-slate-700 mb-3">Para solicitar un turno de castración debés ingresar al portal oficial <strong class="text-brand-navy">MDQ Digital</strong>.</div>
-<a href="https://autenticar.mardelplata.gob.ar/" target="_blank" class="block w-full py-3 bg-brand-navy hover:bg-slate-800 text-white text-center rounded-xl font-bold shadow-md transition mb-1">Ingresar al Portal</a>
+<a href="https://autenticar.mardelplata.gob.ar/" target="_blank" class="w-full p-3 rounded-xl border border-slate-200 bg-brand-navy hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-md mb-2 group animate-pulse">
+  <div class="w-8 h-8 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-mobile-screen-button"></i><i class="fa-solid fa-arrow-right-to-bracket ml-1 text-[11px]"></i></div>
+  <div class="text-[14px] font-bold text-white">Ingresar al Portal</div>
+</a>
 <div class="text-[11px] text-center text-slate-500 mb-4 break-all"><a href="https://autenticar.mardelplata.gob.ar/" target="_blank" class="hover:underline hover:text-sky-600">https://autenticar.mardelplata.gob.ar/</a></div>
 <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">¿Ya tenés usuario?</div>
 <div class="flex gap-2">
@@ -474,7 +477,7 @@ ${getVolverBtn()}`, html: true
   <div><span class="font-bold text-pink-600 w-4 inline-block">7.</span> Aceptá consentimiento</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">8.</span> Elegí fecha y <b>Reservá</b></div>
 </div>
-<a href="https://autenticar.mardelplata.gob.ar/auth/login-option" target="_blank" class="w-full text-left p-3 rounded-xl border border-slate-200 bg-brand-navy hover:bg-slate-800 transition-all flex items-center gap-3 shadow-md mb-2 group">
+<a href="https://autenticar.mardelplata.gob.ar/auth/login-option" target="_blank" class="w-full text-left p-3 rounded-xl border border-slate-200 bg-brand-navy hover:bg-slate-800 transition-all flex items-center gap-3 shadow-md mb-2 group animate-pulse">
   <div class="w-8 h-8 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-user"></i></div>
   <div class="text-[14px] font-bold text-white">Ingresar con DNI y Clave</div>
 </a>
