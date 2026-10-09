@@ -168,7 +168,7 @@ function getMenuText(isReturning = false) {
     const greetingHtml = isReturning
         ? `<div class="mb-3 text-slate-800 font-medium">Te muestro las opciones nuevamente:</div>`
         : `<div class="mb-3 text-slate-800">¡${saludo}! 👋 Soy el <strong>Asistente Virtual de Zoonosis</strong>.</div>
-           <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">Seleccioná una categoría:</div>`;
+           <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">Seleccioná una opción:</div>`;
 
     return `
     ${greetingHtml}
@@ -423,7 +423,7 @@ ${getVolverBtn()}`, html: true
     <div class="flex gap-2 items-start"><i class="fa-solid fa-location-dot text-[#22c55e] mt-0.5"></i><div><strong>Dirección:</strong> Canesa esquina Guanahani</div></div>
     <div class="flex gap-2 items-start"><i class="fa-solid fa-bus text-[#22c55e] mt-0.5"></i><div><strong>Colectivos:</strong> En el mapa podrás ver las paradas de las líneas 522, 571, 573, entre otras, que te acercan a la sede.</div></div>
   </div>
-  <a href="https://maps.app.goo.gl/UbTKkZVThjRuKG4G7" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#15803d] hover:bg-[#166534] text-white py-2.5 rounded-xl font-bold text-xs transition shadow-sm mt-3"><i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Canesa+y+Guanahani,+Mar+del+Plata&travelmode=transit" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#15803d] hover:bg-[#166534] text-white py-2.5 rounded-xl font-bold text-xs transition shadow-sm mt-3"><i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps</a>
 </div>
 ${getVolverBtn()}`, html: true
                 };
@@ -488,10 +488,10 @@ ${getVolverBtn()}`, html: true
                 text: `
 <div class="font-black text-pink-700 flex items-center gap-2 mb-3"><i class="fa-solid fa-list-check text-lg"></i> LOS 8 PASOS DEL TRÁMITE</div>
 <div class="bg-pink-50/50 border border-pink-100 rounded-xl p-3 text-xs text-slate-700 space-y-2 mb-4">
-  <div><span class="font-bold text-pink-600 w-4 inline-block">1.</span> Ingresá con DNI y clave</div>
-  <div><span class="font-bold text-pink-600 w-4 inline-block">2.</span> Clic en <b>Zoonosis</b></div>
-  <div><span class="font-bold text-pink-600 w-4 inline-block">3.</span> Sede Canesa esq. Guanahani</div>
-  <div><span class="font-bold text-pink-600 w-4 inline-block">4.</span> Trámite: <b>Castraciones</b></div>
+  <div><span class="font-bold text-pink-600 w-4 inline-block">1.</span> Trámite: <b>Castración</b></div>
+  <div><span class="font-bold text-pink-600 w-4 inline-block">2.</span> Dependencia: <b>Zoonosis</b></div>
+  <div><span class="font-bold text-pink-600 w-4 inline-block">3.</span> Lugar: <b>Canesa esq. Guanahani</b></div>
+  <div><span class="font-bold text-pink-600 w-4 inline-block">4.</span> Rango de fecha (desde/hasta)</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">5.</span> Concurre titular o tercero</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">6.</span> Llená datos del animal</div>
   <div><span class="font-bold text-pink-600 w-4 inline-block">7.</span> Aceptá consentimiento</div>
@@ -580,13 +580,23 @@ msgInput.addEventListener('keydown', e => {
 });
 
 window.addEventListener('load', () => {
+    // Pantalla de carga girando por 2 segundos
     setTimeout(() => {
-        if (!chatbotActivo) return;
-        const typingEl = showTyping();
+        const splash = document.getElementById('splashScreen');
+        if (splash) {
+            splash.style.opacity = '0';
+            setTimeout(() => splash.remove(), 500);
+        }
+
+        // Luego inicia el chat
         setTimeout(() => {
             if (!chatbotActivo) return;
-            typingEl.remove();
-            appendMessage(getMenuText(), 'received', true);
-        }, 2000);
-    }, 300);
+            const typingEl = showTyping();
+            setTimeout(() => {
+                if (!chatbotActivo) return;
+                typingEl.remove();
+                appendMessage(getMenuText(), 'received', true);
+            }, 1000);
+        }, 400);
+    }, 2000);
 });
